@@ -12,10 +12,14 @@ namespace LaundryApp.Data
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             string adminEmail = configuration["AdminUser:Email"];
             string adminPassword = configuration["AdminUser:Password"];
-            // Create Admin Role if it doesn't exist
-            if (!await roleManager.RoleExistsAsync("Admin"))
+            // Create Admin, Operator, Guest if they don't exist
+            string[] roles = new[] { "Admin", "Operator", "Guest" };
+            foreach (var role in roles)
             {
-                await roleManager.CreateAsync(new IdentityRole("Admin"));
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                }
             }
             // Create Admin User if it doesn't exist
             var adminUser = await userManager.FindByEmailAsync(adminEmail);

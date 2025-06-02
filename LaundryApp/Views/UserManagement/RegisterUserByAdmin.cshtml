@@ -1,0 +1,50 @@
+﻿@* File: Views/UserManagement/RegisterUserByAdmin.cshtml *@
+@model LaundryApp.Models.AdminRegisterUserViewModel
+@{
+    ViewData["Title"] = "Daftarkan Pengguna Baru";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p>Halaman ini hanya bisa diakses oleh Admin untuk mendaftarkan pengguna baru.</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="RegisterUserByAdmin" method="post">
+            <h4>Data Pengguna Baru</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email"></label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Password" class="form-control" />
+                <label asp-for="Password"></label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <label asp-for="ConfirmPassword"></label>
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select asp-for="SelectedRole" class="form-select" asp-items="@Model.AvailableRoles">
+                    <option value="">-- Pilih Peran --</option>
+                </select>
+                <label asp-for="SelectedRole"></label>
+                <span asp-validation-for="SelectedRole" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Daftarkan Pengguna</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

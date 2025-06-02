@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using LaundryApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LaundryApp.Controllers;
 
@@ -18,6 +19,7 @@ public class HomeController : Controller
         return View();
     }
 
+    [Authorize(Roles = "Admin,User")]
     public IActionResult Privacy()
     {
         return View();
